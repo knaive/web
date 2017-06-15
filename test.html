@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
+		<style>
+			li {
+				padding-top: 20px;
+				padding-left: 20px;
+				padding-right: 20px;
+			}	
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li class="one">Chris Paul</li>
+			<li class="one">James Harden</li>
+			<li class="one">Steph Curry</li>
+		</ul>
+		<div></div>
+		<script>
+			$(document).ready(function(){
+				$("div").hide();
+				$("ul").on("click", "li.one", function(){
+					$("div").text("You selected " + $(this).text());
+					$("div").show();
+				});
+			});
+		</script>
+	</body>
+</html>

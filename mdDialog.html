@@ -1,0 +1,102 @@
+<html>
+
+<head>
+  <style>
+    .dialogdemoBasicUsage #popupContainer {
+      position: relative;
+    }
+
+    .dialogdemoBasicUsage .footer {
+      width: 100%;
+      text-align: center;
+      margin-left: 20px;
+    }
+
+    .dialogdemoBasicUsage .footer,
+    .dialogdemoBasicUsage .footer>code {
+      font-size: 0.8em;
+      margin-top: 50px;
+    }
+  </style>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+  <script>
+    angular.module('MyApp', ['ngMaterial', 'ngMessages'])
+
+      .controller('AppCtrl', function ($scope, $mdDialog, $mdMedia) {
+
+        $scope.showConfirm = function (ev) {
+          // Appending dialog to document.body to cover sidenav in docs app
+          var confirm = $mdDialog.confirm({
+            controller: DialogController,
+            templateUrl: 'deleteConfirm.tmpl.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+          })
+          $mdDialog.show(confirm).then(function () {
+            $scope.status = 'Confirm resolved';
+            $scope.codeRunningBeforeResolve = 'code only runs after resolve';
+          });
+
+          $scope.codeRunningBeforeResolve = 'code is running before resolve!';
+        };
+      });
+
+    function DialogController($scope, $mdDialog) {
+      $scope.hide = function () {
+        $mdDialog.hide();
+      };
+
+      $scope.cancel = function () {
+        $mdDialog.cancel();
+      };
+    }
+  </script>
+
+</head>
+
+<body>
+  <div ng-controller="AppCtrl" class="md-padding dialogdemoBasicUsage" id="popupContainer" ng-cloak="" ng-app="MyApp">
+
+    <div class="dialog-demo-content" layout="row" layout-wrap="" layout-margin="">
+      <md-button class="md-primary md-raised" ng-click="showConfirm($event)" flex="100" flex-gt-md="auto">
+        Confirm Dialog
+      </md-button>
+    </div>
+
+    <div ng-if="status">
+      <br>
+      <b layout="row" layout-align="center center" class="md-padding">
+      {{status}}
+    </b>
+      <b layout="row" layout-align="center center" class="md-padding">
+      {{codeRunningBeforeResolve}}
+    </b>
+    </div>
+
+    <script type="text/ng-template" id="deleteConfirm.tmpl.html">
+      <md-dialog ng-cloak>
+        <form>
+          <md-dialog-content>
+            <div class="md-dialog-content">
+              <h2>Delete the Report</h2>
+            </div>
+          </md-dialog-content>
+
+          <md-dialog-actions layout="row">
+            <!--<span flex></span>-->
+            <md-button ng-click="hide()">Cancel</md-button>
+            <md-button ng-click="hide()">Delete</md-button>
+          </md-dialog-actions>
+        </form>
+      </md-dialog>
+    </script>
+    </div>
+
+</body>
+
+</html>
