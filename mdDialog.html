@@ -17,6 +17,7 @@
       font-size: 0.8em;
       margin-top: 50px;
     }
+
   </style>
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
@@ -33,9 +34,10 @@
           // Appending dialog to document.body to cover sidenav in docs app
           var confirm = $mdDialog.confirm({
             controller: DialogController,
-            templateUrl: 'deleteConfirm.tmpl.html',
+            templateUrl: 'deleteConfirm.html',
             parent: angular.element(document.body),
             targetEvent: ev,
+            clickOutsideToClose: true
           })
           $mdDialog.show(confirm).then(function () {
             $scope.status = 'Confirm resolved';
@@ -78,23 +80,31 @@
     </b>
     </div>
 
-    <script type="text/ng-template" id="deleteConfirm.tmpl.html">
+    <script type="text/ng-template" id="deleteConfirm.html">
       <md-dialog ng-cloak>
         <form>
+          <div class="md-toolbar-tools">
+          <h2>Delete the Report</h2>
+          <span flex></span>
+          <md-button class="md-icon-button" ng-click="cancel()">
+            <md-icon md-svg-src="images/close.svg" aria-label="Close dialog"></md-icon>
+          </md-button>
+          </div>
           <md-dialog-content>
             <div class="md-dialog-content">
-              <h2>Delete the Report</h2>
+              <p> Are you sure you want to delete the report? </p>
             </div>
           </md-dialog-content>
 
           <md-dialog-actions layout="row">
-            <!--<span flex></span>-->
-            <md-button ng-click="hide()">Cancel</md-button>
-            <md-button ng-click="hide()">Delete</md-button>
+              <md-button ng-click="hide()" style="text-transform: none;" md-autofocus>Cancel</md-button>
+              <span flex></span>
+              <md-button ng-click="hide()" style="text-transform: none;">Delete</md-button>
           </md-dialog-actions>
         </form>
       </md-dialog>
     </script>
+
     </div>
 
 </body>
