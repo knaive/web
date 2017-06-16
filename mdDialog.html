@@ -27,32 +27,28 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
   <script>
     angular.module('MyApp', ['ngMaterial', 'ngMessages'])
-
-      .controller('AppCtrl', function ($scope, $mdDialog, $mdMedia) {
-
+      .controller('DeleteReportCtrl', function ($scope, $mdDialog, $mdMedia) {
         $scope.showConfirm = function (ev) {
           // Appending dialog to document.body to cover sidenav in docs app
           var confirm = $mdDialog.confirm({
-            controller: DialogController,
+            controller: ConfirmDialogController,
             templateUrl: 'deleteConfirm.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose: true
           })
           $mdDialog.show(confirm).then(function () {
-            $scope.status = 'Confirm resolved';
-            $scope.codeRunningBeforeResolve = 'code only runs after resolve';
+            $scope.status = 'deleted';
+          }).catch(function() {
+            window.alert('canceled');
           });
-
-          $scope.codeRunningBeforeResolve = 'code is running before resolve!';
         };
       });
 
-    function DialogController($scope, $mdDialog) {
-      $scope.hide = function () {
+    function ConfirmDialogController($scope, $mdDialog) {
+      $scope.delete = function () {
         $mdDialog.hide();
       };
-
       $scope.cancel = function () {
         $mdDialog.cancel();
       };
@@ -62,22 +58,17 @@
 </head>
 
 <body>
-  <div ng-controller="AppCtrl" class="md-padding dialogdemoBasicUsage" id="popupContainer" ng-cloak="" ng-app="MyApp">
-
+  <div ng-controller="DeleteReportCtrl" class="md-padding dialogdemoBasicUsage" id="popupContainer" ng-cloak="" ng-app="MyApp">
     <div class="dialog-demo-content" layout="row" layout-wrap="" layout-margin="">
-      <md-button class="md-primary md-raised" ng-click="showConfirm($event)" flex="100" flex-gt-md="auto">
+      <md-button class="md-primary md-raised" ng-click="showConfirm($event)" flex="100" flex-gt-md="auto" style="text-transform:none;">
         Confirm Dialog
       </md-button>
     </div>
-
     <div ng-if="status">
       <br>
       <b layout="row" layout-align="center center" class="md-padding">
-      {{status}}
-    </b>
-      <b layout="row" layout-align="center center" class="md-padding">
-      {{codeRunningBeforeResolve}}
-    </b>
+        {{status}}
+      </b>
     </div>
 
     <script type="text/ng-template" id="deleteConfirm.html">
@@ -97,15 +88,15 @@
           </md-dialog-content>
 
           <md-dialog-actions layout="row">
-              <md-button ng-click="hide()" style="text-transform: none;" md-autofocus>Cancel</md-button>
+              <md-button ng-click="cancel()" style="text-transform: none;" md-autofocus>Cancel</md-button>
               <span flex></span>
-              <md-button ng-click="hide()" style="text-transform: none;">Delete</md-button>
+              <md-button ng-click="delete()" style="text-transform: none;">Delete</md-button>
           </md-dialog-actions>
         </form>
       </md-dialog>
     </script>
 
-    </div>
+  </div>
 
 </body>
 

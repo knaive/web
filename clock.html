@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+	#clock {
+		font: bold 19pt sans;
+		background: #ddf;
+		padding: 10px;
+		border: solid black 2px;
+		border-radius: 10px;
+	}
+		</style>
+	<title>Digital Clock</title>
+	<script type="text/javascript">
+	function displayTime() {
+		console.log('displayTime');
+		var ele = document.getElementById("clock");
+		var now = new Date();
+		ele.innerText = now.toLocaleString();
+		setTimeout(displayTime, 1000);
+	}
+	window.onload = displayTime;
+	</script>
+</head>
+<body>
+<h1>Digital Clock</h1>
+<span id="clock"></span>
+</body>
+</html>

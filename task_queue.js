@@ -1,5 +1,4 @@
-// demo02
-console.log('golb1');
+console.log('glob1');
 
 setTimeout(function() {
     console.log('timeout1');
@@ -72,3 +71,4 @@ setImmediate(function() {
         console.log('immediate2_then')
     })
 })
+
