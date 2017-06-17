@@ -75,6 +75,8 @@
           $(this).hide();
           $(this).siblings('.edit').show();
           $(this).siblings('.show').hide();
+          $("#srInput").focus();
+          $("#descInput").focus();
         });
 
         $("button.edit.cancel").click(function() {
