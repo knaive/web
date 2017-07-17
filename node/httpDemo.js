@@ -31,6 +31,10 @@ function fileServer() {
     var server = http.createServer(function (request, response) {
         var pathname = url.parse(request.url).pathname;
 
+        if (pathname == '/' || pathname == '') {
+            pathname = '/index.html';
+        }
+
         var filepath = path.join(root, pathname);
 
         fs.stat(filepath, function(err, stats) {

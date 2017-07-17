@@ -1,0 +1,39 @@
+div.decoration {
+    font-family: Courier New, Courier, monospace;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: paleturquoise;
+    border: 3px solid black;
+    text-align: center;
+    vertical-align: middle;
+    padding: 30px;
+    top: 60px;
+}
+
+div.button {
+    display: inline;
+    font-family: "Times New Roman", Courier, Serif;
+    font-weight: 400;
+    font-size: 16px;
+    background-color: lightgreen;
+    padding: 10px;
+    border: 2px dashed grey;
+}
+
+div.animation {
+    position: relative;
+    animation: jump 5s 5;
+    -webkit-animation: jump 5s 5;
+}
+
+@keyframes jump {
+    0% { top: 60px; }
+    50% { top: 300px; }
+    100% { top: 60px; }
+}
+
+@-webkit-keyframes jump {
+    0% { top: 60px; }
+    50% { top: 300px; }
+    100% { top: 60px; }
+}
